@@ -20,11 +20,6 @@ public class Sale : BaseEntity
     public DateTime CreatedAt { get; set; }
 
     /// <summary>
-    /// Date when the sale was made.
-    /// </summary>
-    public DateTime MadeAt { get; set; }
-
-    /// <summary>
     /// Customer Id.
     /// Required.
     /// </summary>

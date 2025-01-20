@@ -54,7 +54,7 @@ public class SaleRepository : ISaleRepository
     /// <returns>The sale if found, null otherwise</returns>
     public async Task<Sale?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.Sales.FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
+        return await _context.Sales.FirstOrDefaultAsync(o=> o.Id == id && o.Status != Domain.Enums.SaleStatus.Cancelled, cancellationToken);
     }
 
     /// <summary>

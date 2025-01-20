@@ -18,9 +18,9 @@ public class CreateSaleResult
     public Guid Id { get; set; }
 
     /// <summary>
-    /// Date when the sale was made.
+    /// Date when the sale was created.
     /// </summary>
-    public DateTime MadeAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     /// <summary>
     /// Gets or sets the initial status of the Sale account.

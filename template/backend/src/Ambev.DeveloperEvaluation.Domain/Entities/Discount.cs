@@ -32,7 +32,11 @@ public class Discount : BaseEntity
     public bool TryApply(SaleItem saleItem)
     {
         if (saleItem == null) return false;
-        if (saleItem.Quantity < MinQuantity || saleItem.Quantity > MaxQuantity) return false;
+        if (saleItem.Quantity < MinQuantity || saleItem.Quantity > MaxQuantity)
+        {
+            saleItem.TotalAmount = saleItem.Quantity * saleItem.UnitPrice;
+            return false;
+        }
         
         saleItem.Discount = Percentage;
         saleItem.TotalAmount = saleItem.Quantity * saleItem.UnitPrice * (decimal)Percentage;

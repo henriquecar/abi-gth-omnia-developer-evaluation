@@ -6,8 +6,8 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation;
 
 public class SaleValidator : AbstractValidator<Sale>
 {
-    public const decimal MinTotalAmount = 1;
-    public const decimal MaxTotalAmount = 200000;
+    public const int MinTotalAmount = 1;
+    public const int MaxTotalAmount = 200000;
 
     public SaleValidator()
     {

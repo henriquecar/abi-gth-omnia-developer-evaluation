@@ -69,7 +69,8 @@ public class SaleRepository : ISaleRepository
         if (sale == null)
             return false;
 
-        _context.Sales.Remove(sale);
+        sale.Status = Domain.Enums.SaleStatus.Cancelled;
+        _context.Sales.Update(sale);
         await _context.SaveChangesAsync(cancellationToken);
         return true;
     }

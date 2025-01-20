@@ -16,5 +16,9 @@ public class DiscountConfiguration : IEntityTypeConfiguration<Discount>
         builder.Property(u => u.MinQuantity).IsRequired();
         builder.Property(u => u.MaxQuantity).IsRequired();
         builder.Property(u => u.Percentage).IsRequired();
+        builder.HasData(
+            new Discount { Id = Guid.NewGuid(), MinQuantity = 4, MaxQuantity = 9, Percentage = .1 },
+            new Discount { Id = Guid.NewGuid(), MinQuantity = 10, MaxQuantity = 20, Percentage = .2 }
+        );
     }
 }

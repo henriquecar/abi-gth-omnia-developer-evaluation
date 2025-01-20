@@ -8,8 +8,6 @@ using Ambev.DeveloperEvaluation.WebApi.Features.Sales.DeleteSale;
 using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.Application.Sales.DeleteSale;
-using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSaleItem;
-using Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales;
 
@@ -52,10 +50,6 @@ public class SalesController : BaseController
             return BadRequest(validationResult.Errors);
 
         var command = _mapper.Map<CreateSaleCommand>(request);
-        var itemsResult = await CreateSaleItems(request.Items, cancellationToken);
-        command.Items = itemsResult.Select(i => i.Id).ToList();
-        command.TotalAmount = itemsResult.Sum(i => i.TotalAmount);
-
         var response = await _mediator.Send(command, cancellationToken);
 
         return Created(string.Empty, new ApiResponseWithData<CreateSaleResponse>
@@ -64,13 +58,5 @@ public class SalesController : BaseController
             Message = "Sale created successfully",
             Data = _mapper.Map<CreateSaleResponse>(response)
         });
-    }
-
-    private async Task<IList<CreateSaleItemResult>> CreateSaleItems(Dictionary<Guid, CreateSaleItemRequest> request, CancellationToken cancellationToken)
-    {
-        var command = _mapper.Map<IEnumerable<CreateSaleItemCommand>>(request);
-        var tasks = command.Select(async i => await _mediator.Send(i, cancellationToken));
-        var results = await Task.WhenAll(tasks);
-        return results;
     }
 }

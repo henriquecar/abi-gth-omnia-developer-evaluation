@@ -16,6 +16,7 @@ namespace Ambev.DeveloperEvaluation.Unit.Application;
 public class CreateSaleHandlerTests
 {
     private readonly ISaleRepository _saleRepository;
+    private readonly ICreateSaleItemProcessor _createSaleItemProcessor;
     private readonly IMapper _mapper;
     private readonly CreateSaleHandler _handler;
 
@@ -26,8 +27,9 @@ public class CreateSaleHandlerTests
     public CreateSaleHandlerTests()
     {
         _saleRepository = Substitute.For<ISaleRepository>();
+        _createSaleItemProcessor = Substitute.For<ICreateSaleItemProcessor>();
         _mapper = Substitute.For<IMapper>();
-        _handler = new CreateSaleHandler(_saleRepository, _mapper);
+        _handler = new CreateSaleHandler(_saleRepository, _createSaleItemProcessor, _mapper);
     }
 
     /// <summary>
@@ -43,7 +45,6 @@ public class CreateSaleHandlerTests
             Id = Guid.NewGuid(),
             CustomerId = command.CustomerId,
             BranchId = command.BranchId,
-            Items = command.Items,
             TotalAmount = command.TotalAmount
         };
 
@@ -97,7 +98,6 @@ public class CreateSaleHandlerTests
             Id = Guid.NewGuid(),
             CustomerId = command.CustomerId,
             BranchId = command.BranchId,
-            Items = command.Items,
             TotalAmount = command.TotalAmount
         };
 

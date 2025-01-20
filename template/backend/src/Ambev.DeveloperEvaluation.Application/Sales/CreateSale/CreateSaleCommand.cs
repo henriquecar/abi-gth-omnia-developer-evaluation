@@ -1,5 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
-using Ambev.DeveloperEvaluation.Common.Validation;
+﻿using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using MediatR;
 
@@ -34,7 +33,7 @@ public class CreateSaleCommand : IRequest<CreateSaleResult>
     /// <summary>
     /// Purchased products.
     /// </summary>
-    public IList<Guid> Items { get; set; } = new List<Guid>();
+    public IList<CreateSaleItem> Items { get; set; } = new List<CreateSaleItem>();
 
     /// <summary>
     /// Total amount.

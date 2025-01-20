@@ -27,7 +27,7 @@ public static class CreateSaleHandlerTestData
         .RuleFor(u => u.CustomerId, f => f.Random.Guid())
         .RuleFor(u => u.BranchId, f => f.Random.Guid())
         .RuleFor(u => u.TotalAmount, f => f.Random.Decimal(SaleValidator.MinTotalAmount, SaleItemValidator.MaxUnitPrice))
-        .RuleFor(u => u.Items, f => Enumerable.Range(1, 7).Select(_ => f.Random.Guid()).ToList());
+        .RuleFor(u => u.Items, f => Enumerable.Range(1, 7).Select(_ => CreateSaleItemHandlerTestData.GenerateValidCommand()).ToList());
 
     /// <summary>
     /// Generates a valid Sale entity with randomized data.

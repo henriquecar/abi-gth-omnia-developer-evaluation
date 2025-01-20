@@ -2,12 +2,12 @@
 using Ambev.DeveloperEvaluation.Domain.Validation;
 using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSaleItem;
+namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
 /// <summary>
-/// Validator for CreateSaleRequest that defines validation rules for sale creation.
+/// Validator for CreateSaleCommand that defines validation rules for Sale creation command.
 /// </summary>
-public class CreateSaleItemRequestValidator : AbstractValidator<KeyValuePair<Guid, CreateSaleItemRequest>>
+public class CreateSaleItemValidator : AbstractValidator<CreateSaleItem>
 {
     const short MinItemsPerProduct = 1;
     const short MaxItemsPerProduct = 20;
@@ -21,10 +21,10 @@ public class CreateSaleItemRequestValidator : AbstractValidator<KeyValuePair<Gui
     /// - ProcutId: Required
     /// - Quanty: Required, inclusive between <see cref="MinItemsPerProduct"/> and <see cref="MaxItemsPerProduct"/>
     /// </remarks>
-    public CreateSaleItemRequestValidator()
+    public CreateSaleItemValidator()
     {
-        RuleFor(sale => sale.Value).NotNull();
-        RuleFor(sale => sale.Value.Quantity).InclusiveBetween(MinItemsPerProduct, MaxItemsPerProduct);
-        RuleFor(sale => sale.Value.UnitPrice).GreaterThan(decimal.Zero).LessThanOrEqualTo(MaxUnitPrice);
+        RuleFor(sale => sale.ProductId).NotEmpty();
+        RuleFor(sale => sale.Quantity).InclusiveBetween(MinItemsPerProduct, MaxItemsPerProduct);
+        RuleFor(sale => sale.UnitPrice).GreaterThan(decimal.Zero).LessThanOrEqualTo(MaxUnitPrice);
     }
 }

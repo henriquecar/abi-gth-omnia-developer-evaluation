@@ -2,7 +2,7 @@
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
+namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
 /// <summary>
 /// Command for creating a new SaleItem.
@@ -14,11 +14,11 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
 /// that returns a <see cref="CreateSaleItemResult"/>.
 /// 
 /// The data provided in this command is validated using the 
-/// <see cref="CreateSaleItemCommandValidator"/> which extends 
+/// <see cref="CreateSaleItemValidator"/> which extends 
 /// <see cref="AbstractValidator{T}"/> to ensure that the fields are correctly 
 /// populated and follow the required rules.
 /// </remarks>
-public class CreateSaleItemCommand : IRequest<CreateSaleItemResult>
+public class CreateSaleItem : IRequest<CreateSaleItemResult>
 {
     /// <summary>
     /// The product id reference.
@@ -37,7 +37,7 @@ public class CreateSaleItemCommand : IRequest<CreateSaleItemResult>
 
     public ValidationResultDetail Validate()
     {
-        var validator = new CreateSaleItemCommandValidator();
+        var validator = new CreateSaleItemValidator();
         var result = validator.Validate(this);
         return new ValidationResultDetail
         {

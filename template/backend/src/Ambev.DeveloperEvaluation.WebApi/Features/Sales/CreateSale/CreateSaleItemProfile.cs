@@ -1,8 +1,7 @@
 using AutoMapper;
-using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
-using Ambev.DeveloperEvaluation.Application.Sales.CreateSaleItem;
+using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSaleItem;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 
 /// <summary>
 /// Profile for mapping between Application and API CreateSaleItem responses
@@ -14,7 +13,7 @@ public class CreateSaleItemProfile : Profile
     /// </summary>
     public CreateSaleItemProfile()
     {
-        CreateMap<KeyValuePair<Guid, CreateSaleItemRequest>, CreateSaleItemCommand>().ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Key));
+        CreateMap<KeyValuePair<Guid, CreateSaleItemRequest>, CreateSaleItem>().ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Key));
         CreateMap<CreateSaleItemResult, CreateSaleItemResponse>();
     }
 }

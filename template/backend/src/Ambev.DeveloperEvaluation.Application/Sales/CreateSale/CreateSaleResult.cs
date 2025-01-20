@@ -1,4 +1,6 @@
 ﻿
+using Ambev.DeveloperEvaluation.Domain.Enums;
+
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
 /// <summary>
@@ -11,10 +13,24 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 public class CreateSaleResult
 {
     /// <summary>
-    /// Gets or sets the unique identifier of the newly created Sale.
+    /// The unique identifier of the created Sale
     /// </summary>
-    /// <value>A GUID that uniquely identifies the created Sale in the system.</value>
     public Guid Id { get; set; }
+
+    /// <summary>
+    /// Date when the sale was made.
+    /// </summary>
+    public DateTime MadeAt { get; set; } = DateTime.Now;
+
+    /// <summary>
+    /// Gets or sets the initial status of the Sale account.
+    /// </summary>
+    public SaleStatus Status { get; set; } = SaleStatus.AwaitingPayment;
+
+    /// <summary>
+    /// Total sale amount.
+    /// </summary>
+    public decimal TotalAmount { get; set; } = decimal.Zero;
 
     /// <summary>
     /// Gets or sets the list of items.

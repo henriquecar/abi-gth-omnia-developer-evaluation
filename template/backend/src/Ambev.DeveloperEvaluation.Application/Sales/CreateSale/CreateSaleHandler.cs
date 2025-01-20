@@ -48,8 +48,8 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleRe
         command.Items.Select(i => i.SaleId = createdSale.Id).ToList();
 
         var itemsResult = await CreateSaleItems(command.Items, cancellationToken);
-        sale.TotalAmount = itemsResult.Sum(i => i.TotalAmount);
-        await _saleRepository.UpdateAsync(sale, cancellationToken);
+        createdSale.TotalAmount = itemsResult.Sum(i => i.TotalAmount);
+        await _saleRepository.UpdateAsync(createdSale, cancellationToken);
 
         var result = _mapper.Map<CreateSaleResult>(createdSale);
         result.Items = itemsResult.ToList();

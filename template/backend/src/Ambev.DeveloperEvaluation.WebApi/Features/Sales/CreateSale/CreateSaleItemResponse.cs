@@ -6,6 +6,11 @@
 public class CreateSaleItemResponse
 {
     /// <summary>
+    /// The id reference.
+    /// </summary>
+    public Guid Id { get; set; }
+
+    /// <summary>
     /// The product id reference.
     /// </summary>
     public Guid ProductId { get; set; }

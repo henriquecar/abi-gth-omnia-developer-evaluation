@@ -69,6 +69,9 @@ public class SaleRepository : ISaleRepository
         if (sale == null)
             return false;
 
+        if (sale.Status == Domain.Enums.SaleStatus.Completed)
+            throw new InvalidOperationException("The sale is already completed and can't be deleted.");
+
         sale.Status = Domain.Enums.SaleStatus.Cancelled;
         _context.Sales.Update(sale);
         await _context.SaveChangesAsync(cancellationToken);

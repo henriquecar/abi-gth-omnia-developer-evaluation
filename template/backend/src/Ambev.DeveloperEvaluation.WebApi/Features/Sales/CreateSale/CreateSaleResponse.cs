@@ -1,0 +1,35 @@
+using Ambev.DeveloperEvaluation.Domain.Enums;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSaleItem;
+
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
+
+/// <summary>
+/// API response model for CreateSale operation
+/// </summary>
+public class CreateSaleResponse
+{
+    /// <summary>
+    /// The unique identifier of the created Sale
+    /// </summary>
+    public Guid Id { get; set; }
+
+    /// <summary>
+    /// Date when the sale was made.
+    /// </summary>
+    public DateTime MadeAt { get; set; } = DateTime.Now;
+
+    /// <summary>
+    /// Gets or sets the initial status of the Sale account.
+    /// </summary>
+    public SaleStatus Status { get; set; } = SaleStatus.Draft;
+
+    /// <summary>
+    /// Total sale amount.
+    /// </summary>
+    public decimal TotalAmount { get; set; } = decimal.Zero;
+
+    /// <summary>
+    /// Purchased products.
+    /// </summary>
+    public IList<CreateSaleItemRequest> Items { get; set; } = new List<CreateSaleItemRequest>();
+}

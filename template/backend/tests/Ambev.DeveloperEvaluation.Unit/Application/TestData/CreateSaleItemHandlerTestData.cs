@@ -20,8 +20,7 @@ public static class CreateSaleItemHandlerTestData
     /// </summary>
     private static readonly Faker<CreateSaleItem> createSaleItemHandlerFaker = new Faker<CreateSaleItem>()
         .RuleFor(u => u.ProductId, f => f.Random.Guid())
-        .RuleFor(u => u.Quantity, f => f.Random.Short(1, 3))
-        .RuleFor(u => u.UnitPrice, f => f.Random.Decimal(1, 2000));
+        .RuleFor(u => u.Quantity, f => f.Random.Short(1, 3));
 
     /// <summary>
     /// Configures the Faker to generate valid SaleItem entities.
@@ -32,8 +31,7 @@ public static class CreateSaleItemHandlerTestData
     /// </summary>
     private static readonly Faker<CreateSaleItem> createSaleItemWithFirstDicountLevelHandlerFaker = new Faker<CreateSaleItem>()
         .RuleFor(u => u.ProductId, f => f.Random.Guid())
-        .RuleFor(u => u.Quantity, f => f.Random.Short(4, 9))
-        .RuleFor(u => u.UnitPrice, f => f.Random.Decimal(1, 2000));
+        .RuleFor(u => u.Quantity, f => f.Random.Short(4, 9));
 
     /// <summary>
     /// Configures the Faker to generate valid SaleItem entities.
@@ -44,8 +42,7 @@ public static class CreateSaleItemHandlerTestData
     /// </summary>
     private static readonly Faker<CreateSaleItem> createSaleItemWithSecondDicountLevelHandlerFaker = new Faker<CreateSaleItem>()
         .RuleFor(u => u.ProductId, f => f.Random.Guid())
-        .RuleFor(u => u.Quantity, f => f.Random.Short(4, 9))
-        .RuleFor(u => u.UnitPrice, f => f.Random.Decimal(1, 2000));
+        .RuleFor(u => u.Quantity, f => f.Random.Short(4, 9));
 
     /// <summary>
     /// Configures the Faker to generate valid SaleItem entities.
@@ -56,8 +53,7 @@ public static class CreateSaleItemHandlerTestData
     /// </summary>
     private static readonly Faker<CreateSaleItem> createSaleItemWithNegativeQuantityHandlerFaker = new Faker<CreateSaleItem>()
         .RuleFor(u => u.ProductId, f => f.Random.Guid())
-        .RuleFor(u => u.Quantity, f => f.Random.Short(short.MinValue, 0))
-        .RuleFor(u => u.UnitPrice, f => f.Random.Decimal(1, 2000));
+        .RuleFor(u => u.Quantity, f => f.Random.Short(short.MinValue, 0));
 
     /// <summary>
     /// Configures the Faker to generate valid SaleItem entities.
@@ -68,20 +64,7 @@ public static class CreateSaleItemHandlerTestData
     /// </summary>
     private static readonly Faker<CreateSaleItem> createSaleItemExceedsQuantityHandlerFaker = new Faker<CreateSaleItem>()
         .RuleFor(u => u.ProductId, f => f.Random.Guid())
-        .RuleFor(u => u.Quantity, f => f.Random.Short(SaleItemValidator.MaxItemsPerProduct + 1, short.MaxValue))
-        .RuleFor(u => u.UnitPrice, f => f.Random.Decimal(1, 2000));
-
-    /// <summary>
-    /// Configures the Faker to generate valid SaleItem entities.
-    /// The generated sale item will exceeds unit price:
-    /// - ProductId (valid Guid)
-    /// - Quantity (from <see cref="SaleItemValidator.MaxItemsPerProduct + 1"> to <see cref="short.MaxValue">)
-    /// - Unit price (from <see cref="SaleItemValidator.MaxItemsPerProduct + 1"> to <see cref="decimal.MaxValue">)
-    /// </summary>
-    private static readonly Faker<CreateSaleItem> createSaleItemExceedsUnitPriceHandlerFaker = new Faker<CreateSaleItem>()
-        .RuleFor(u => u.ProductId, f => f.Random.Guid())
-        .RuleFor(u => u.Quantity, f => f.Random.Short(SaleItemValidator.MaxItemsPerProduct + 1, short.MaxValue))
-        .RuleFor(u => u.UnitPrice, f => f.Random.Decimal(SaleItemValidator.MaxUnitPrice + 1, decimal.MaxValue));
+        .RuleFor(u => u.Quantity, f => f.Random.Short(SaleItemValidator.MaxItemsPerProduct + 1, short.MaxValue));
 
     /// <summary>
     /// Generates a valid SaleItem entity with randomized data.
@@ -136,16 +119,5 @@ public static class CreateSaleItemHandlerTestData
     public static CreateSaleItem GenerateExceedsQuantityCommand()
     {
         return createSaleItemExceedsQuantityHandlerFaker.Generate();
-    }
-
-    /// <summary>
-    /// Generates a exceeds unit price SaleItem entity with randomized data.
-    /// The generated saleItem will have all properties populated with valid values
-    /// that meet the system's validation requirements except by unit price.
-    /// </summary>
-    /// <returns>A invalid SaleItem entity with randomly generated data.</returns>
-    public static CreateSaleItem GenerateExceedsUnitPriceCommand()
-    {
-        return createSaleItemExceedsUnitPriceHandlerFaker.Generate();
     }
 }

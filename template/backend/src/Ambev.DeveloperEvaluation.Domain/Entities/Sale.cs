@@ -51,7 +51,7 @@ public class Sale : BaseEntity
     /// Gets the sale's current status.
     /// Indicates whether the sale is draft, awaiting payment, awaiting transport, transportins, completed or cancelled
     /// </summary>
-    public SaleStatus Status { get; set; } = SaleStatus.Draft;
+    public SaleStatus Status { get; set; } = SaleStatus.AwaitingPayment;
 
     /// <summary>
     /// Initializes a new instance of the Sale class.

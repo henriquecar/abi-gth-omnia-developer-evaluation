@@ -53,7 +53,7 @@ public class SaleRepository : ISaleRepository
     public async Task<Sale?> GetDraftByCustomerId(Guid customerId, CancellationToken cancellationToken = default)
     {
         return await _context.Sales
-            .FirstOrDefaultAsync(u => u.Status == Domain.Enums.SaleStatus.Draft && u.CustomerId == customerId, cancellationToken);
+            .FirstOrDefaultAsync(u => u.Status == Domain.Enums.SaleStatus.AwaitingPayment && u.CustomerId == customerId, cancellationToken);
     }
 
     /// <summary>

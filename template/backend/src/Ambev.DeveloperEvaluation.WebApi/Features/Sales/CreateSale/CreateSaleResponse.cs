@@ -20,7 +20,7 @@ public class CreateSaleResponse
     /// <summary>
     /// Gets or sets the initial status of the Sale account.
     /// </summary>
-    public SaleStatus Status { get; set; } = SaleStatus.Draft;
+    public SaleStatus Status { get; set; } = SaleStatus.AwaitingPayment;
 
     /// <summary>
     /// Total sale amount.

@@ -11,7 +11,6 @@ public class CreateSaleItemValidator : AbstractValidator<CreateSaleItem>
 {
     const short MinItemsPerProduct = 1;
     const short MaxItemsPerProduct = 20;
-    const decimal MaxUnitPrice = 20000;
 
     /// <summary>
     /// Initializes a new instance of the CreateSaleRequestValidator with defined validation rules.
@@ -25,6 +24,5 @@ public class CreateSaleItemValidator : AbstractValidator<CreateSaleItem>
     {
         RuleFor(sale => sale.ProductId).NotEmpty();
         RuleFor(sale => sale.Quantity).InclusiveBetween(MinItemsPerProduct, MaxItemsPerProduct);
-        RuleFor(sale => sale.UnitPrice).GreaterThan(decimal.Zero).LessThanOrEqualTo(MaxUnitPrice);
     }
 }

@@ -16,6 +16,7 @@ public class CreateSaleItemProcessor : ICreateSaleItemProcessor
 {
     private readonly ISaleItemRepository _saleItemRepository;
     private readonly IDiscountRepository _discountRepository;
+    private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
     private readonly CreateSaleItemValidator _validator;
 
@@ -24,11 +25,13 @@ public class CreateSaleItemProcessor : ICreateSaleItemProcessor
     /// </summary>
     /// <param name="saleItemRepository">The SaleItem repository</param>
     /// <param name="discountRepository">The discount repository</param>
+    /// <param name="productRepository">The product repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
-    public CreateSaleItemProcessor(ISaleItemRepository saleItemRepository, IDiscountRepository discountRepository, IMapper mapper)
+    public CreateSaleItemProcessor(ISaleItemRepository saleItemRepository, IDiscountRepository discountRepository, IProductRepository productRepository, IMapper mapper)
     {
         _saleItemRepository = saleItemRepository;
         _discountRepository = discountRepository;
+        _productRepository = productRepository;
         _mapper = mapper;
         _validator = new CreateSaleItemValidator();
     }
@@ -46,9 +49,14 @@ public class CreateSaleItemProcessor : ICreateSaleItemProcessor
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var saleItem = _mapper.Map<SaleItem>(command);
+        var product = await _productRepository.GetByIdAsync(command.ProductId, cancellationToken);
+        if (product == null)
+            throw new InvalidOperationException($"Product {command.ProductId} not found");
 
-        var discounts = await _discountRepository.ListAll(cancellationToken);
+        var saleItem = _mapper.Map<SaleItem>(command);
+        saleItem.UnitPrice = product.UnitPrice;
+
+        var discounts = await _discountRepository.ListAllAsync(cancellationToken);
         foreach (var discount in discounts)
         {
             if (discount.TryApply(saleItem)) break;

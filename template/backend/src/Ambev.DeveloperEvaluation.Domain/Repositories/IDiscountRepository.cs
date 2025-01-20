@@ -3,7 +3,7 @@ using Ambev.DeveloperEvaluation.Domain.Entities;
 namespace Ambev.DeveloperEvaluation.Domain.Repositories;
 
 /// <summary>
-/// Repository interface for Sale entity operations
+/// Repository interface for Discount entity operations
 /// </summary>
 public interface IDiscountRepository
 {
@@ -12,5 +12,5 @@ public interface IDiscountRepository
     /// </summary>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>All discounts</returns>
-    Task<IEnumerable<Discount>> ListAll(CancellationToken cancellationToken = default);
+    Task<IEnumerable<Discount>> ListAllAsync(CancellationToken cancellationToken = default);
 }

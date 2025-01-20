@@ -9,9 +9,4 @@ public class CreateSaleItemRequest
     /// Quantity.
     /// </summary>
     public short Quantity { get; set; } = 0;
-
-    /// <summary>
-    /// Unit price.
-    /// </summary>
-    public decimal UnitPrice { get; set; } = decimal.Zero;
 }

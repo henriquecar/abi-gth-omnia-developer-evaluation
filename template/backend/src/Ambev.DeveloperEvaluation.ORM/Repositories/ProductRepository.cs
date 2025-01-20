@@ -5,17 +5,17 @@ using Microsoft.EntityFrameworkCore;
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 
 /// <summary>
-/// Implementation of IDiscountRepository using Entity Framework Core
+/// Implementation of IProductRepository using Entity Framework Core
 /// </summary>
-public class DiscountRepository : IDiscountRepository
+public class ProductRepository : IProductRepository
 {
     private readonly DefaultContext _context;
 
     /// <summary>
-    /// Initializes a new instance of DiscountRepository
+    /// Initializes a new instance of ProductRepository
     /// </summary>
     /// <param name="context">The database context</param>
-    public DiscountRepository(DefaultContext context)
+    public ProductRepository(DefaultContext context)
     {
         _context = context;
     }
@@ -25,8 +25,8 @@ public class DiscountRepository : IDiscountRepository
     /// </summary>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>All discounts</returns>
-    public async Task<IEnumerable<Discount>> ListAllAsync(CancellationToken cancellationToken = default)
+    public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.Discounts.ToListAsync();
+        return await _context.Products.FirstOrDefaultAsync(o=> o.Id == id, cancellationToken);
     }
 }

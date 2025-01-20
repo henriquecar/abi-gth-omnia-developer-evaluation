@@ -4,10 +4,6 @@ public enum SaleStatus
 {
     Unknown = 0,
     /// <summary>
-    /// Purchase in cart not made
-    /// </summary>
-    Draft,
-    /// <summary>
     /// Awaiting payment
     /// </summary>
     AwaitingPayment,

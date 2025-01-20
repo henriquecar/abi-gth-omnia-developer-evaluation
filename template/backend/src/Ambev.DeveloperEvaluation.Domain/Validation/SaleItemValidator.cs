@@ -14,9 +14,6 @@ public class SaleItemValidator : AbstractValidator<SaleItem>
     {
         RuleFor(sale => sale.ProductId).NotEmpty().WithMessage("Product cannot be empty.");
         RuleFor(sale => sale.Quantity).InclusiveBetween(MinItemsPerProduct, MaxItemsPerProduct).WithMessage($"Quantity should be between {MinItemsPerProduct} and {MaxItemsPerProduct}.");
-        RuleFor(sale => sale.UnitPrice)
-            .GreaterThan(decimal.Zero).WithMessage($"Unit price should be greather than {decimal.Zero}.")
-            .LessThanOrEqualTo(MaxUnitPrice).WithMessage($"Unit price should be less than or equal to {MaxUnitPrice}.");
         RuleFor(sale => sale.TotalAmount).GreaterThan(decimal.Zero).WithMessage($"Total amount should be greather than {decimal.Zero}.");
         RuleFor(sale => sale.Discount).GreaterThan((short)decimal.Zero).WithMessage($"Discount should be greather than {decimal.Zero}.");
     }

@@ -9,7 +9,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 /// </summary>
 /// <remarks>
 /// This command is used to capture the required data for creating a SaleItem, 
-/// including ProductId, Quantity and UnitPrice. 
+/// including ProductId and Quantity. 
 /// It implements <see cref="IRequest{TResponse}"/> to initiate the request 
 /// that returns a <see cref="CreateSaleItemResult"/>.
 /// 
@@ -29,11 +29,6 @@ public class CreateSaleItem : IRequest<CreateSaleItemResult>
     /// Quantity.
     /// </summary>
     public short Quantity { get; set; } = 0;
-
-    /// <summary>
-    /// Unit price.
-    /// </summary>
-    public decimal UnitPrice { get; set; } = decimal.Zero;
 
     public ValidationResultDetail Validate()
     {

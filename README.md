@@ -84,3 +84,8 @@ This section includes links to the detailed documentation for the different API 
 This section describes the overall structure and organization of the project files and directories. 
 
 See [Project Structure](/.doc/project-structure.md)
+
+## Test notes
+This section outlines the notes I did along the test development. 
+
+See [Test notes](/.doc/test-notes.md)

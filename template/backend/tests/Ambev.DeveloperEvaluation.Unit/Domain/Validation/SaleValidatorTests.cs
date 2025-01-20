@@ -83,26 +83,6 @@ public class SaleValidatorTests
     }
 
     /// <summary>
-    /// Tests that validation fails for invalid items formats.
-    /// This test verifies that items that are:
-    /// - Empty
-    /// fail validation with appropriate error messages.
-    /// </summary>
-    [Fact(DisplayName = "Invalid items formats should fail validation")]
-    public void Given_InvalidSaleItems_When_Validated_Then_ShouldHaveError()
-    {
-        // Arrange
-        var sale = SaleTestData.GenerateValidSale();
-        sale.Items = Enumerable.Empty<Guid>().ToList();
-
-        // Act
-        var result = _validator.TestValidate(sale);
-
-        // Assert
-        result.ShouldHaveValidationErrorFor(x => x.Items);
-    }
-
-    /// <summary>
     /// Tests that validation fails for invalid total amount formats.
     /// This test verifies that total amount that are:
     /// - Total amount less than minimum

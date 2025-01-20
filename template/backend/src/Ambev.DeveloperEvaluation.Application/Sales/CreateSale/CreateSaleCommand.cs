@@ -35,11 +35,6 @@ public class CreateSaleCommand : IRequest<CreateSaleResult>
     /// </summary>
     public IList<CreateSaleItem> Items { get; set; } = new List<CreateSaleItem>();
 
-    /// <summary>
-    /// Total amount.
-    /// </summary>
-    public decimal TotalAmount { get; set; }
-
     public ValidationResultDetail Validate()
     {
         var validator = new CreateSaleCommandValidator();

@@ -86,30 +86,6 @@ public class SaleItemValidatorTests
     }
 
     /// <summary>
-    /// Tests that validation fails for invalid total amount formats.
-    /// This test verifies that total amount that are:
-    /// - Total amount less than minimum
-    /// - Total amount greather than maximum
-    /// fail validation with appropriate error messages.
-    /// </summary>
-    /// <param name="totalAmount">The invalid total amount to test.</param>
-    [Theory(DisplayName = "Invalid total amount formats should fail validation")]
-    [InlineData(SaleItemValidator.MinTotalAmount - 1)] // less than minimum
-    [InlineData(SaleItemValidator.MaxTotalAmount + 1)] // greather than maximum
-    public void Given_InvalidSaleItemTotalAmount_When_Validated_Then_ShouldHaveError(decimal totalAmount)
-    {
-        // Arrange
-        var saleItem = SaleItemTestData.GenerateValidSaleItem();
-        saleItem.TotalAmount = totalAmount;
-
-        // Act
-        var result = _validator.TestValidate(saleItem);
-
-        // Assert
-        result.ShouldHaveValidationErrorFor(x => x.TotalAmount);
-    }
-
-    /// <summary>
     /// Tests that validation fails for invalid discount formats.
     /// This test verifies that discount that are:
     /// - Discount less than minimum

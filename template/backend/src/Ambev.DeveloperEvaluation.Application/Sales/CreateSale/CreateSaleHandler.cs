@@ -43,25 +43,27 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleRe
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var existingSale = await _saleRepository.GetDraftByCustomerId(command.CustomerId, cancellationToken);
-        if (existingSale != null)
-            throw new InvalidOperationException($"A draft sale for customer {command.CustomerId} already exists");
-
         var sale = _mapper.Map<Sale>(command);
-        var itemsResult = await CreateSaleItems(command.Items, cancellationToken);
-        sale.Items = itemsResult.Select(i => i.Id).ToList();
-        sale.TotalAmount = itemsResult.Sum(i => i.TotalAmount);
-
         var createdSale = await _saleRepository.CreateAsync(sale, cancellationToken);
+        command.Items.Select(i => i.SaleId = createdSale.Id).ToList();
+
+        var itemsResult = await CreateSaleItems(command.Items, cancellationToken);
+        sale.TotalAmount = itemsResult.Sum(i => i.TotalAmount);
+        await _saleRepository.UpdateAsync(sale, cancellationToken);
+
         var result = _mapper.Map<CreateSaleResult>(createdSale);
+        result.Items = itemsResult.ToList();
         return result;
     }
 
-    private async Task<IList<CreateSaleItemResult>> CreateSaleItems(IList<CreateSaleItem> request, CancellationToken cancellationToken)
+    private async Task<IEnumerable<CreateSaleItemResult>> CreateSaleItems(IList<CreateSaleItem> command, CancellationToken cancellationToken)
     {
-        var command = _mapper.Map<IEnumerable<CreateSaleItem>>(request);
-        var tasks = command.Select(async i => await _createSaleItemProcessor.Process(i, cancellationToken));
-        var results = await Task.WhenAll(tasks);
+        var results = new CreateSaleItemResult[command.Count];
+        for (int i = 0; i < command.Count; i++)
+        {
+            var item = command[i];
+            results[i] = await _createSaleItemProcessor.Process(item, cancellationToken);
+        }
         return results;
     }
 }

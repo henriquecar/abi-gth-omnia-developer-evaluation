@@ -22,7 +22,6 @@ public static class SaleTestData
     private static readonly Faker<Sale> SaleFaker = new Faker<Sale>()
         .RuleFor(u => u.BranchId, f => f.Random.Guid())
         .RuleFor(u => u.CustomerId, f => f.Random.Guid())
-        .RuleFor(u => u.Items, f => Enumerable.Range(1, 7).Select(_ => f.Random.Guid()).ToList())
         .RuleFor(u => u.TotalAmount, f => f.Random.Decimal(SaleValidator.MinTotalAmount, SaleValidator.MaxTotalAmount));
 
     /// <summary>

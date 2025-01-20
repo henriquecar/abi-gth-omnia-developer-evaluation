@@ -7,7 +7,7 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 /// <summary>
 /// Validator for CreateSaleRequest that defines validation rules for sale creation.
 /// </summary>
-public class CreateSaleItemRequestValidator : AbstractValidator<KeyValuePair<Guid, CreateSaleItemRequest>>
+public class CreateSaleItemRequestValidator : AbstractValidator<CreateSaleItemRequest>
 {
     const short MinItemsPerProduct = 1;
     const short MaxItemsPerProduct = 20;
@@ -22,7 +22,7 @@ public class CreateSaleItemRequestValidator : AbstractValidator<KeyValuePair<Gui
     /// </remarks>
     public CreateSaleItemRequestValidator()
     {
-        RuleFor(sale => sale.Value).NotNull();
-        RuleFor(sale => sale.Value.Quantity).InclusiveBetween(MinItemsPerProduct, MaxItemsPerProduct);
+        RuleFor(sale => sale.ProductId).NotEmpty();
+        RuleFor(sale => sale.Quantity).InclusiveBetween(MinItemsPerProduct, MaxItemsPerProduct);
     }
 }

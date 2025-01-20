@@ -13,7 +13,7 @@ public class CreateSaleItemProfile : Profile
     /// </summary>
     public CreateSaleItemProfile()
     {
-        CreateMap<KeyValuePair<Guid, CreateSaleItemRequest>, CreateSaleItem>().ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Key));
+        CreateMap<CreateSaleItemRequest, CreateSaleItem>();
         CreateMap<CreateSaleItemResult, CreateSaleItemResponse>();
     }
 }

@@ -3,6 +3,8 @@ using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Validation;
+using MediatR;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
@@ -41,7 +43,7 @@ public class SaleItem : BaseEntity
     /// <summary>
     /// Total sale amount.
     /// </summary>
-    public decimal TotalAmount { get; set; } = decimal.Zero;
+    public decimal TotalAmount { get => UnitPrice * Quantity * (decimal)(1 - Discount); }
 
     /// <summary>
     /// Applied discount.

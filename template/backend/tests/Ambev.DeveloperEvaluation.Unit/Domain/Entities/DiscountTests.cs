@@ -31,7 +31,7 @@ public class DiscountTests
         // Assert
         Assert.True(result);
         Assert.Equal(saleItem.Discount, discount.Percentage);
-        Assert.Equal(saleItem.UnitPrice * saleItem.Quantity * (decimal)saleItem.Discount, saleItem.TotalAmount);
+        Assert.Equal(saleItem.UnitPrice * saleItem.Quantity * (decimal)(1 - saleItem.Discount), saleItem.TotalAmount);
     }
 
     /// <summary>

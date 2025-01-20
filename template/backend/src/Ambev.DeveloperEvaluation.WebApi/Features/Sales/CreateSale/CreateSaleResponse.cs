@@ -30,5 +30,5 @@ public class CreateSaleResponse
     /// <summary>
     /// Purchased products.
     /// </summary>
-    public IList<CreateSaleItemRequest> Items { get; set; } = new List<CreateSaleItemRequest>();
+    public IList<CreateSaleItemResponse> Items { get; set; } = new List<CreateSaleItemResponse>();
 }

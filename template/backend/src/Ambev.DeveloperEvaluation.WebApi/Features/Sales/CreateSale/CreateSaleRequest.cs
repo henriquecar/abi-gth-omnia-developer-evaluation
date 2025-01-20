@@ -20,5 +20,5 @@ public class CreateSaleRequest
     /// <summary>
     /// Purchased products.
     /// </summary>
-    public Dictionary<Guid, CreateSaleItemRequest> Items { get; set; } = new Dictionary<Guid, CreateSaleItemRequest>();
+    public IList<CreateSaleItemRequest> Items { get; set; } = new List<CreateSaleItemRequest>();
 }

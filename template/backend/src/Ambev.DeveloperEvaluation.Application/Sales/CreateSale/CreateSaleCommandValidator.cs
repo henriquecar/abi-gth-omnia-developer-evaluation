@@ -26,6 +26,6 @@ public class CreateSaleCommandValidator : AbstractValidator<CreateSaleCommand>
         RuleFor(sale => sale.BranchId).NotEmpty();
         RuleFor(sale => sale.CustomerId).NotEmpty();
         RuleFor(sale => sale.Items).NotEmpty();
-        RuleFor(sale => sale.TotalAmount).InclusiveBetween(MinTotalAmount, MaxTotalAmount);
+        RuleForEach(sale => sale.Items).SetValidator(new CreateSaleItemValidator());
     }
 }

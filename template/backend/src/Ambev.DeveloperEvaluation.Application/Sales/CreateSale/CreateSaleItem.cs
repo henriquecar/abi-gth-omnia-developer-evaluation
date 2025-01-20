@@ -26,6 +26,11 @@ public class CreateSaleItem : IRequest<CreateSaleItemResult>
     public Guid ProductId { get; set; }
 
     /// <summary>
+    /// The sale id reference.
+    /// </summary>
+    public Guid SaleId { get; set; }
+
+    /// <summary>
     /// Quantity.
     /// </summary>
     public short Quantity { get; set; } = 0;

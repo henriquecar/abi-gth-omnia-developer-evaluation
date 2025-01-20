@@ -3,6 +3,7 @@ using Ambev.DeveloperEvaluation.Common.Validation;
 using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Enums;
 using Ambev.DeveloperEvaluation.Domain.Validation;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities;
 
@@ -20,20 +21,14 @@ public class Sale : BaseEntity
 
     /// <summary>
     /// Date when the sale was made.
-    /// Null for draft sales.
     /// </summary>
-    public DateTime? MadeAt { get; set; }
+    public DateTime MadeAt { get; set; }
 
     /// <summary>
     /// Customer Id.
     /// Required.
     /// </summary>
     public Guid CustomerId { get; set; }
-
-    /// <summary>
-    /// Purchased products.
-    /// </summary>
-    public IList<Guid> Items { get; set; } = new List<Guid>();
 
     /// <summary>
     /// Total sale amount.
@@ -49,7 +44,7 @@ public class Sale : BaseEntity
 
     /// <summary>
     /// Gets the sale's current status.
-    /// Indicates whether the sale is draft, awaiting payment, awaiting transport, transportins, completed or cancelled
+    /// Indicates whether the sale is awaiting payment, awaiting transport, transportins, completed or cancelled
     /// </summary>
     public SaleStatus Status { get; set; } = SaleStatus.AwaitingPayment;
 
